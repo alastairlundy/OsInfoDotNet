@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
 namespace AlastairLundy.OsInfoDotNet.Mac;
@@ -12,16 +13,14 @@ public interface IMacOsInfoProvider
     /// Returns whether a Mac is Apple Silicon based.
     /// </summary>
     /// <returns>true if the currently running Mac uses Apple Silicon; false if running on an Intel Mac.</returns>
-#if NET5_0_OR_GREATER
-#endif
+    [SupportedOSPlatform("macos")]
     bool IsAppleSiliconMac();
     
     /// <summary>
     /// Detects macOS System Information.
     /// </summary>
     /// <returns></returns>
-#if NET5_0_OR_GREATER
-#endif
+    [SupportedOSPlatform("macos")]
     Task<MacOsSystemInfo> GetMacSystemInfoAsync();
 
     /// <summary>
@@ -29,8 +28,7 @@ public interface IMacOsInfoProvider
     /// </summary>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
-#if NET5_0_OR_GREATER
-#endif
+    [SupportedOSPlatform("macos")]
     Version GetDarwinVersion();
 
     /// <summary>
@@ -38,8 +36,7 @@ public interface IMacOsInfoProvider
     /// </summary>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
-#if NET5_0_OR_GREATER
-#endif
+    [SupportedOSPlatform("macos")]
     Version GetXnuVersion();
 
     /// <summary>
@@ -47,8 +44,7 @@ public interface IMacOsInfoProvider
     /// </summary>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
-#if NET5_0_OR_GREATER
-#endif
+    [SupportedOSPlatform("macos")]
     Task<Version> GetMacOsVersionAsync();
 
     /// <summary>
@@ -56,7 +52,6 @@ public interface IMacOsInfoProvider
     /// </summary>
     /// <returns>the build number of the installed version of macOS.</returns>
     /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
-#if NET5_0_OR_GREATER
-#endif
+    [SupportedOSPlatform("macos")]
     Task<string> GetMacOsBuildNumberAsync();
 }

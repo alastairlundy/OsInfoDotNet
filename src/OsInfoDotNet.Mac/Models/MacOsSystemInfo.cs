@@ -16,6 +16,4 @@ public class MacOsSystemInfo
     public Version XnuVersion { get; set; } 
     
     public string MacOsBuildNumber { get; set; }
-    
-    public ProcessorArchitecture CpuArchitecture { get; set; }
 }

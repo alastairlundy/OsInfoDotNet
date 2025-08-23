@@ -3,8 +3,10 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+
 using AlastairLundy.CliInvoke.Core;
 using AlastairLundy.CliInvoke.Core.Primitives;
+
 using AlastairLundy.OsInfoDotNet.Mac.Internals.Localizations;
 
 namespace AlastairLundy.OsInfoDotNet.Mac;
@@ -17,6 +19,10 @@ public class MacOsInfoProvider : IMacOsInfoProvider
 {
     private readonly IProcessInvoker _processInvoker;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="processInvoker"></param>
     public MacOsInfoProvider(IProcessInvoker processInvoker)
     {
         _processInvoker = processInvoker;
