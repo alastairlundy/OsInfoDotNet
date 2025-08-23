@@ -15,7 +15,7 @@ public interface IWindowsSystemInfoProvider
     /// <exception cref="WindowsEditionDetectionException">Throws an exception if operating system detection fails.</exception>
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't Windows.</exception>
     [SupportedOSPlatform("windows")]
-    Task<WindowsEdition> GetWindowsEdition();
+    Task<WindowsEdition> GetWindowsEditionAsync();
 
     /// <summary>
     /// Detects the Edition of Windows from specified WindowsSystemInformation.
@@ -25,7 +25,7 @@ public interface IWindowsSystemInfoProvider
     /// <exception cref="WindowsEditionDetectionException"></exception>
     /// <exception cref="PlatformNotSupportedException">Thrown when not running on Windows.</exception>
     [SupportedOSPlatform("windows")]
-    WindowsEdition GetWindowsEdition(WindowsSystemInformationModel windowsSystemInformation);
+    WindowsEdition GetWindowsEdition(WindowsSystemInfo windowsSystemInformation);
 
     /// <summary>
     /// Detect WindowsSystemInformation
@@ -33,5 +33,5 @@ public interface IWindowsSystemInfoProvider
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Thrown when not running on Windows.</exception>
     [SupportedOSPlatform("windows")]
-    Task<WindowsSystemInformationModel> GetWindowsSystemInformation();
+    Task<WindowsSystemInfo> GetWindowsSystemInfoAsync();
 }

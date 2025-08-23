@@ -34,7 +34,7 @@ public class WinRegistrySearcher : IWinRegistrySearcher
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("windows")]
 #endif
-    public async Task<string> GetValue(string query){
+    public async Task<string> GetValueAsync(string query){
         if (!OperatingSystem.IsWindows()) throw new PlatformNotSupportedException();
         
         ProcessStartInfo startInfo = new ProcessStartInfo
@@ -64,7 +64,7 @@ public class WinRegistrySearcher : IWinRegistrySearcher
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("windows")]
 #endif
-    public async Task<string> GetValue(string query, string value){
+    public async Task<string> GetValueAsync(string query, string value){
         if (!OperatingSystem.IsWindows()) throw new PlatformNotSupportedException();
         
         ProcessStartInfo startInfo = new ProcessStartInfo

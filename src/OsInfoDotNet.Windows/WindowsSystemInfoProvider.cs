@@ -33,9 +33,9 @@ public class WindowsSystemInfoProvider : IWindowsSystemInfoProvider
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("windows")]
 #endif
-    public async Task<WindowsEdition> GetWindowsEdition()
+    public async Task<WindowsEdition> GetWindowsEditionAsync()
     {
-        return GetWindowsEdition(await GetWindowsSystemInformation());
+        return GetWindowsEdition(await GetWindowsSystemInfoAsync());
     }
 
     /// <summary>
@@ -48,7 +48,7 @@ public class WindowsSystemInfoProvider : IWindowsSystemInfoProvider
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("windows")]
 #endif
-    public WindowsEdition GetWindowsEdition(WindowsSystemInformationModel windowsSystemInformation)
+    public WindowsEdition GetWindowsEdition(WindowsSystemInfo windowsSystemInformation)
     {
         if (!OperatingSystem.IsWindows())
         {
@@ -143,14 +143,14 @@ public class WindowsSystemInfoProvider : IWindowsSystemInfoProvider
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("windows")]
 #endif
-    public async Task<WindowsSystemInformationModel> GetWindowsSystemInformation()
+    public async Task<WindowsSystemInfo> GetWindowsSystemInfoAsync()
     {
         if (!OperatingSystem.IsWindows())
         {
             throw new PlatformNotSupportedException();
         }
         
-        WindowsSystemInformationModel windowsSystemInformation = new WindowsSystemInformationModel();
+        WindowsSystemInfo windowsSystemInformation = new WindowsSystemInfo();
         HyperVRequirementsModel hyperVRequirements = new HyperVRequirementsModel();
         
         List<string> processors = new List<string>();

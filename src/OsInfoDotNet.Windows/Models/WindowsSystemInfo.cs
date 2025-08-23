@@ -4,7 +4,7 @@ using System.Text;
 // ReSharper disable once CheckNamespace
 namespace AlastairLundy.OsInfoDotNet.Windows;
 
-public class WindowsSystemInformationModel
+public class WindowsSystemInfo
 {
     public string HostName { get; set; }
     

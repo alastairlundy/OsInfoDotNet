@@ -15,6 +15,10 @@ namespace AlastairLundy.OsInfoDotNet.Windows
     {
         private readonly IProcessInvoker _processInvoker;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="processInvoker"></param>
         public WinManagementObjectSearcher(IProcessInvoker processInvoker)
         {
             _processInvoker = processInvoker;
@@ -30,7 +34,7 @@ namespace AlastairLundy.OsInfoDotNet.Windows
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("windows")]
 #endif
-        public async Task<Dictionary<string, string>> Get(List<string> queryObjectsList, string wmiClass)
+        public async Task<Dictionary<string, string>> GetAsync(List<string> queryObjectsList, string wmiClass)
         {
             Dictionary<string, string> queryObjectsDictionary = new Dictionary<string, string>();
 

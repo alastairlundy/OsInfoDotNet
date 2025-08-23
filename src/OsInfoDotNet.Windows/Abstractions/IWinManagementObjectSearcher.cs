@@ -14,5 +14,5 @@ public interface IWinManagementObjectSearcher
     /// <param name="wmiClass"></param>
     /// <returns></returns>
     [SupportedOSPlatform("windows")]
-    Task<Dictionary<string, string>> Get(List<string> queryObjectsList, string wmiClass);
+    Task<Dictionary<string, string>> GetAsync(List<string> queryObjectsList, string wmiClass);
 }
