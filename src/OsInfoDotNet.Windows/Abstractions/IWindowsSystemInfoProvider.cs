@@ -3,7 +3,7 @@ using System.Runtime.Versioning;
 using System.Threading.Tasks;
 using AlastairLundy.OsInfoDotNet.Windows.Exceptions;
 
-namespace AlastairLundy.OsInfoDotNet.Windows;
+namespace AlastairLundy.OsInfoDotNet.Windows.Abstractions;
 
 public interface IWindowsSystemInfoProvider
 {

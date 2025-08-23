@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 using AlastairLundy.CliInvoke.Core;
 using AlastairLundy.CliInvoke.Core.Primitives;
-
+using AlastairLundy.OsInfoDotNet.Mac.Abstractions;
 using AlastairLundy.OsInfoDotNet.Mac.Internals.Localizations;
 
 namespace AlastairLundy.OsInfoDotNet.Mac;

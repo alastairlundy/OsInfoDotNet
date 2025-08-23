@@ -1,16 +1,23 @@
-
-
 using System.Runtime.Versioning;
-
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
+using AlastairLundy.CliInvoke.Core;
+using AlastairLundy.CliInvoke.Core.Primitives;
 using AlastairLundy.OsInfoDotNet.Windows.Helpers;
 
 namespace AlastairLundy.OsInfoDotNet.Windows
 {
     public class WinManagementObjectSearcher
     {
+        private readonly IProcessInvoker _processInvoker;
+
+        public WinManagementObjectSearcher(IProcessInvoker processInvoker)
+        {
+            _processInvoker = processInvoker;
+        }
 
         /// <summary>
         /// Returns a Dictionary of Query objects and their associated WMI values.
@@ -22,36 +29,40 @@ namespace AlastairLundy.OsInfoDotNet.Windows
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("windows")]
 #endif
-        public static Dictionary<string, string> Get(List<string> queryObjectsList, string wmiClass)
+        public async Task<Dictionary<string, string>> Get(List<string> queryObjectsList, string wmiClass)
         {
             Dictionary<string, string> queryObjectsDictionary = new Dictionary<string, string>();
-            
-                if (OperatingSystem.IsWindows())
+
+            if (!OperatingSystem.IsWindows()) throw new PlatformNotSupportedException();
+
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                Arguments = $"Get-WmiObject -Class {wmiClass} | Select-Object *",
+                FileName = $"{WinPowershellInfo.Location}{Path.DirectorySeparatorChar}powershell.exe",
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                CreateNoWindow = true,
+            };
+
+            BufferedProcessResult result = await _processInvoker.ExecuteBufferedAsync(startInfo);
+
+            string output = result.StandardOutput.Replace(wmiClass, string.Empty);
+
+            if (output == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            foreach (string query in queryObjectsList)
+            {
+                if (query.Contains(output))
                 {
-                    var result = Cli.Wrap($"{WinPowershellInfo.Location}{Path.DirectorySeparatorChar}powershell.exe")
-                        .WithArguments($"Get-WmiObject -Class {wmiClass} | Select-Object *")
-                        .ExecuteBufferedSync();
-                    
-                    string output = result.StandardOutput.Replace(wmiClass, string.Empty);
-
-                    if (output == null)
-                    {
-                        throw new ArgumentNullException();
-                    }
-                    
-                    foreach (string query in queryObjectsList)
-                    {
-                        if (query.Contains(output))
-                        {
-                            string value = output.Replace(query + "                         : ", string.Empty);
-                            queryObjectsDictionary.Add(query, value);
-                        }
-                    }
-                    
-                    return queryObjectsDictionary;
+                    string value = output.Replace(query + "                         : ", string.Empty);
+                    queryObjectsDictionary.Add(query, value);
                 }
+            }
 
-                throw new PlatformNotSupportedException();
+            return queryObjectsDictionary;
         }
     }
 }

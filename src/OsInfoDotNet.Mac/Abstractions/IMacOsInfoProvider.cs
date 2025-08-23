@@ -2,7 +2,7 @@ using System;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
-namespace AlastairLundy.OsInfoDotNet.Mac;
+namespace AlastairLundy.OsInfoDotNet.Mac.Abstractions;
 
 /// <summary>
 /// 

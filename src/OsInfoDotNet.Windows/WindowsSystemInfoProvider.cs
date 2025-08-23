@@ -7,6 +7,7 @@ using System.Runtime.Versioning;
 using System.Threading.Tasks;
 using AlastairLundy.CliInvoke.Core;
 using AlastairLundy.CliInvoke.Core.Primitives;
+using AlastairLundy.OsInfoDotNet.Windows.Abstractions;
 using AlastairLundy.OsInfoDotNet.Windows.Exceptions;
 using AlastairLundy.OsInfoDotNet.Windows.Helpers;
 
