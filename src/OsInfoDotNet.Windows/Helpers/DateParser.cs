@@ -2,8 +2,13 @@ using System;
 
 namespace AlastairLundy.OsInfoDotNet.Windows.Helpers;
 
-public class DateParser
+internal class DateParser
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="info"></param>
+    /// <returns></returns>
     internal DateTime ParseDates(string[] info)
     {
         DateTime dt = new DateTime();

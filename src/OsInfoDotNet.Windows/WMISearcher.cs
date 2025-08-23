@@ -17,7 +17,7 @@ namespace AlastairLundy.OsInfoDotNet.Windows;
 /// A class to make searching WMI easier.
 /// </summary>
 // ReSharper disable once InconsistentNaming
-public class WMISearcher
+public class WMISearcher : IWMISearcher
 {
     private readonly IProcessInvoker _processInvoker;
 

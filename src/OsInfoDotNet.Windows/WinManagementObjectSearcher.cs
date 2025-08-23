@@ -10,7 +10,7 @@ using AlastairLundy.OsInfoDotNet.Windows.Helpers;
 
 namespace AlastairLundy.OsInfoDotNet.Windows
 {
-    public class WinManagementObjectSearcher
+    public class WinManagementObjectSearcher : IWinManagementObjectSearcher
     {
         private readonly IProcessInvoker _processInvoker;
 

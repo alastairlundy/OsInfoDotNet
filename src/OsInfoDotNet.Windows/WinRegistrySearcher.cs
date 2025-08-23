@@ -37,7 +37,7 @@ namespace AlastairLundy.OsInfoDotNet.Windows;
 /// <summary>
 /// A class to make searching the Windows Registry easier.
 /// </summary>
-public class WinRegistrySearcher
+public class WinRegistrySearcher : IWinRegistrySearcher
 {
     private readonly IProcessInvoker _processInvoker;
 
