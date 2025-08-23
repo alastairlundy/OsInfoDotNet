@@ -1,7 +1,10 @@
 using System;
+using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
-namespace AlastairLundy.OsInfoDotNet.Windows;
+// ReSharper disable InconsistentNaming
+
+namespace AlastairLundy.OsInfoDotNet.Windows.Abstractions;
 
 public interface IWMISearcher
 {
@@ -11,8 +14,7 @@ public interface IWMISearcher
     /// <param name="wmiClass"></param>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Thrown if run on an Operating System that isn't Windows.</exception>
-#if NET5_0_OR_GREATER
-#endif
+    [SupportedOSPlatform("windows")]
     Task<string> GetWMIClass(string wmiClass);
 
     /// <summary>
@@ -23,7 +25,6 @@ public interface IWMISearcher
     /// <returns></returns>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="PlatformNotSupportedException">Thrown if run on an Operating System that isn't Windows.</exception>
-#if NET5_0_OR_GREATER
-#endif
+    [SupportedOSPlatform("windows")]
     Task<string> GetWMIValue(string property, string wmiClass);
 }

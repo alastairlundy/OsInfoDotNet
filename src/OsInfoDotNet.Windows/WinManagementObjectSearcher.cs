@@ -6,6 +6,7 @@ using System.IO;
 using System.Threading.Tasks;
 using AlastairLundy.CliInvoke.Core;
 using AlastairLundy.CliInvoke.Core.Primitives;
+using AlastairLundy.OsInfoDotNet.Windows.Abstractions;
 using AlastairLundy.OsInfoDotNet.Windows.Helpers;
 
 namespace AlastairLundy.OsInfoDotNet.Windows

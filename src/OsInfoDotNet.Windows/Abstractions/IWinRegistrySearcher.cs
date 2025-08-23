@@ -1,7 +1,8 @@
 using System;
+using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
-namespace AlastairLundy.OsInfoDotNet.Windows;
+namespace AlastairLundy.OsInfoDotNet.Windows.Abstractions;
 
 public interface IWinRegistrySearcher
 {
@@ -11,8 +12,7 @@ public interface IWinRegistrySearcher
     /// <param name="query"></param>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Thrown if run on an Operating System that isn't Windows.</exception>
-#if NET5_0_OR_GREATER
-#endif
+    [SupportedOSPlatform("windows")]
     Task<string> GetValue(string query);
 
     /// <summary>
@@ -22,7 +22,6 @@ public interface IWinRegistrySearcher
     /// <param name="value"></param>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Thrown if run on an Operating System that isn't Windows.</exception>
-#if NET5_0_OR_GREATER
-#endif
+    [SupportedOSPlatform("windows")]
     Task<string> GetValue(string query, string value);
 }

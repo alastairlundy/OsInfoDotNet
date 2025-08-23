@@ -31,6 +31,7 @@ using System.IO;
 using System.Threading.Tasks;
 using AlastairLundy.CliInvoke.Core;
 using AlastairLundy.CliInvoke.Core.Primitives;
+using AlastairLundy.OsInfoDotNet.Windows.Abstractions;
 
 namespace AlastairLundy.OsInfoDotNet.Windows;
 

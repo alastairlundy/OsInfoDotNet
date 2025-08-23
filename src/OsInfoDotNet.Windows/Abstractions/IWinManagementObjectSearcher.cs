@@ -1,7 +1,8 @@
 using System.Collections.Generic;
+using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
-namespace AlastairLundy.OsInfoDotNet.Windows;
+namespace AlastairLundy.OsInfoDotNet.Windows.Abstractions;
 
 public interface IWinManagementObjectSearcher
 {
@@ -12,7 +13,6 @@ public interface IWinManagementObjectSearcher
     /// <param name="queryObjectsList"></param>
     /// <param name="wmiClass"></param>
     /// <returns></returns>
-#if NET5_0_OR_GREATER
-#endif
+    [SupportedOSPlatform("windows")]
     Task<Dictionary<string, string>> Get(List<string> queryObjectsList, string wmiClass);
 }
