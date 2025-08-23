@@ -13,7 +13,7 @@ public interface IWinRegistrySearcher
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Thrown if run on an Operating System that isn't Windows.</exception>
     [SupportedOSPlatform("windows")]
-    Task<string> GetValue(string query);
+    Task<string> GetValueAsync(string query);
 
     /// <summary>
     ///  Gets the value of a registry key in the Windows registry.
@@ -23,5 +23,5 @@ public interface IWinRegistrySearcher
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Thrown if run on an Operating System that isn't Windows.</exception>
     [SupportedOSPlatform("windows")]
-    Task<string> GetValue(string query, string value);
+    Task<string> GetValueAsync(string query, string value);
 }
