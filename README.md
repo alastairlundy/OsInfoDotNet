@@ -1,1 +1,1 @@
-# WinOsInfo
+# OsInfoDotNet
