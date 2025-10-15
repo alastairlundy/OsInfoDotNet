@@ -4,7 +4,6 @@ using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
 using AlastairLundy.CliInvoke.Core;
-using AlastairLundy.CliInvoke.Core.Primitives;
 using AlastairLundy.OsInfoDotNet.Mac.Abstractions;
 using AlastairLundy.OsInfoDotNet.Mac.Internals.Localizations;
 
@@ -15,13 +14,13 @@ namespace AlastairLundy.OsInfoDotNet.Mac;
 /// </summary>
 public class MacOsSystemProfilerInfoProvider : IMacOsSystemProfilerInfoProvider
 {
-    private readonly IProcessInvoker _processInvoker;
+    private readonly IProcessConfigurationInvoker _processInvoker;
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="processInvoker"></param>
-    public MacOsSystemProfilerInfoProvider(IProcessInvoker processInvoker)
+    public MacOsSystemProfilerInfoProvider(IProcessConfigurationInvoker processInvoker)
     {
         _processInvoker = processInvoker;
     }
