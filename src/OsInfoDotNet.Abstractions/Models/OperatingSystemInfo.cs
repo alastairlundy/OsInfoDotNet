@@ -1,13 +1,13 @@
 using System;
-using OsInfoDotNet.Core.Enums;
+
 // ReSharper disable InconsistentNaming
 
-namespace OsInfoDotNet.Core;
+namespace OsInfoDotNet.Abstractions;
 
 public class OperatingSystemInfo : IEquatable<OperatingSystemInfo>
 {
     public string Name { get; }
-    
+
     /// <summary>
     /// 
     /// </summary>

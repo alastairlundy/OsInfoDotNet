@@ -1,6 +1,6 @@
 
 // ReSharper disable InconsistentNaming
-namespace OsInfoDotNet.Core.Enums;
+namespace OsInfoDotNet.Abstractions;
 
 public enum OperatingSystemFamily
 {

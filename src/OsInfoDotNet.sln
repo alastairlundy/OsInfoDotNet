@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OsInfoDotNet.Windows", "OsI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OsInfoDotNet.Mac", "OsInfoDotNet.Mac\OsInfoDotNet.Mac.csproj", "{2445766C-4838-490B-8159-A4548DB2F304}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OsInfoDotNet.Core", "OsInfoDotNet.Core\OsInfoDotNet.Core.csproj", "{5D6D2F4B-6FBE-465D-8034-FD40D9404EB0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OsInfoDotNet.Abstractions", "OsInfoDotNet.Abstractions\OsInfoDotNet.Abstractions.csproj", "{5D6D2F4B-6FBE-465D-8034-FD40D9404EB0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Implementations", "Implementations", "{7B6673A9-CA0E-4E02-9546-9A45FCEF8C23}"
 EndProject
