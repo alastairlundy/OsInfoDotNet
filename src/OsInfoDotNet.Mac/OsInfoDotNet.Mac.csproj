@@ -13,7 +13,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="AlastairLundy.CliInvoke.Core" Version="2.0.0-alpha.7" />
+      <PackageReference Include="AlastairLundy.CliInvoke.Core" Version="2.0.0-beta.6" />
     </ItemGroup>
 
     <ItemGroup>
@@ -29,6 +29,10 @@
         <AutoGen>True</AutoGen>
         <DependentUpon>Resources.resx</DependentUpon>
       </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\OsInfoDotNet.Abstractions\OsInfoDotNet.Abstractions.csproj" />
     </ItemGroup>
 
 </Project>
