@@ -10,6 +10,8 @@
         <PackageId>AlastairLundy.OsInfoDotNet.Windows</PackageId>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>AlastairLundy.OsInfoDotNet.Windows</Title>
+        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <Authors />
         <RepositoryType>git</RepositoryType>
     </PropertyGroup>
