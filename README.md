@@ -14,6 +14,8 @@
 - [License](#license)
 - [Acknowledgements](#acknowledgements)
 
+## License
+OsInfoDotNet is licensed under the Apache 2.0 license. Feel free to use and modify OsInfoDotNet according to the terms of the license.
 
 ## Acknowledgements
 ### Projects
