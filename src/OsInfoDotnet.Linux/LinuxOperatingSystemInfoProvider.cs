@@ -23,7 +23,7 @@ public class LinuxOperatingSystemInfoProvider : IOperatingSystemInfoProvider
     }
     
     
-    public async Task<OperatingSystemInfo> GetOperatingSystemInfoAsync()
+    public async Task<OperatingSystemInfo> GetOperatingSystemInfoAsync(CancellationToken cancellationToken)
     {
         LinuxOsReleaseInfo linuxOsReleaseInfo = await _linuxOsReleaseProvider.GetReleaseInfoAsync();
         
