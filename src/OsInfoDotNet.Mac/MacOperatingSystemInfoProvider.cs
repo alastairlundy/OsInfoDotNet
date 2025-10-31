@@ -1,30 +1,48 @@
 using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+using System.Threading;
 using System.Threading.Tasks;
 
-using AlastairLundy.OsInfoDotNet.Mac.Internals.Localizations;
+using AlastairLundy.CliInvoke.Core;
 
 using OsInfoDotNet.Abstractions;
+using OsInfoDotNet.Mac.Internals.Localizations;
 
-namespace AlastairLundy.OsInfoDotNet.Mac;
+namespace OsInfoDotNet.Mac;
 
 /// <summary>
 /// 
 /// </summary>
 public class MacOperatingSystemInfoProvider : IOperatingSystemInfoProvider
 {
+    private readonly IProcessInvoker _processInvoker;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="processInvoker"></param>
+    public MacOperatingSystemInfoProvider(IProcessInvoker processInvoker)
+    {
+        _processInvoker = processInvoker;
+    }
     
-    public async Task<OperatingSystemInfo> GetOperatingSystemInfoAsync()
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [SupportedOSPlatform("macos")]
+    [SupportedOSPlatform("maccatalyst")]
+    public async Task<OperatingSystemInfo> GetOperatingSystemInfoAsync(CancellationToken cancellationToken)
     {
         OperatingSystemInfo operatingSystemInfo = new OperatingSystemInfo(
             GetOsName(),
-            await GetMacOsVersionAsync(),
+            await GetMacOsVersionAsync(cancellationToken),
             GetXnuVersion(),
             OperatingSystemFamily.Darwin,
-            await GetMacOsBuildNumberAsync()
+            await GetMacOsBuildNumberAsync(cancellationToken)
         );
 
         return operatingSystemInfo;
@@ -41,6 +59,7 @@ public class MacOperatingSystemInfoProvider : IOperatingSystemInfoProvider
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
     [SupportedOSPlatform("macos")]
+    [SupportedOSPlatform("maccatalyst")]
     private Version GetXnuVersion()
     {
         if (!OperatingSystem.IsMacOS())
@@ -81,19 +100,18 @@ public class MacOperatingSystemInfoProvider : IOperatingSystemInfoProvider
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
     [SupportedOSPlatform("macos")]
-    private async Task<Version> GetMacOsVersionAsync()
+    [SupportedOSPlatform("maccatalyst")]
+    private async Task<Version> GetMacOsVersionAsync(CancellationToken cancellationToken)
     {
-        if (OperatingSystem.IsMacOS())
-        {
-            string[] result = await GetMacSwVersInfo();
-
-            return Version.Parse(result[1].Replace("ProductVersion:", string.Empty)
-                .Replace(" ", string.Empty));
-        }
-        else
+        if (!OperatingSystem.IsMacOS())
         {
             throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
         }
+
+        string[] result = await GetMacSwVersInfo(cancellationToken);
+
+        return Version.Parse(result[1].Replace("ProductVersion:", string.Empty)
+            .Replace(" ", string.Empty));
     }
     
     /// <summary>
@@ -102,14 +120,15 @@ public class MacOperatingSystemInfoProvider : IOperatingSystemInfoProvider
     /// <returns>the build number of the installed version of macOS.</returns>
     /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
     [SupportedOSPlatform("macos")]
-    private async Task<string> GetMacOsBuildNumberAsync()
+    [SupportedOSPlatform("maccatalyst")]
+    private async Task<string> GetMacOsBuildNumberAsync(CancellationToken cancellationToken)
     {
         if (!OperatingSystem.IsMacOS())
         {
             throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
         }
 
-        string[] result = await GetMacSwVersInfo();
+        string[] result = await GetMacSwVersInfo(cancellationToken);
 
         return result[2].ToLower().Replace("BuildVersion:",
             string.Empty).Replace(" ", string.Empty);
@@ -121,7 +140,8 @@ public class MacOperatingSystemInfoProvider : IOperatingSystemInfoProvider
     /// </summary>
     /// <returns></returns>
     [SupportedOSPlatform("macos")]
-    private async Task<string[]> GetMacSwVersInfo()
+    [SupportedOSPlatform("maccatalyst")]
+    private async Task<string[]> GetMacSwVersInfo(CancellationToken cancellationToken)
     {
         ProcessStartInfo startInfo = new ProcessStartInfo
         {
