@@ -143,40 +143,13 @@ public class MacOperatingSystemInfoProvider : IOperatingSystemInfoProvider
     [SupportedOSPlatform("maccatalyst")]
     private async Task<string[]> GetMacSwVersInfo(CancellationToken cancellationToken)
     {
-        ProcessStartInfo startInfo = new ProcessStartInfo
-        {
-            FileName = "/usr/bin/sw_vers",
-            UseShellExecute = false,
-            CreateNoWindow = true,
-            RedirectStandardOutput = true,
-            RedirectStandardError = true,
-        };
+        ProcessConfiguration processConfiguration = new("/usr/bin/sw_vers",
+            false, true, true);
 
-        Process process = new Process()
-        {
-            StartInfo = startInfo,
-            EnableRaisingEvents = true
-        };
-        
-        Task waitForExit = process.WaitForExitAsync();
-        Task<string> standardOutput = process.StandardOutput.ReadToEndAsync();
-
-        try
-        {
-            process.Start();
-
-            await Task.WhenAll(waitForExit, standardOutput);
-        }
-        finally
-        {
-            process.Dispose();
-            waitForExit.Dispose();
-            standardOutput.Dispose();
-        }
-
-        string standardOutputStr = await standardOutput;
+        BufferedProcessResult processResult = await _processInvoker.ExecuteBufferedAsync(processConfiguration,
+            ProcessExitConfiguration.Default, true, cancellationToken);
         
         // ReSharper disable once StringLiteralTypo
-        return standardOutputStr.Split(Convert.ToChar(Environment.NewLine));
+        return processResult.StandardOutput.Split(Convert.ToChar(Environment.NewLine));
     }
 }
