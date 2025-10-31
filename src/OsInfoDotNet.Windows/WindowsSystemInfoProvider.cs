@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Runtime.Versioning;
+using System.Threading;
 using System.Threading.Tasks;
+
 using AlastairLundy.CliInvoke.Core;
-using AlastairLundy.CliInvoke.Core.Primitives;
+using AlastairLundy.CliInvoke.Specializations.Configurations;
 using AlastairLundy.OsInfoDotNet.Windows.Abstractions;
 using AlastairLundy.OsInfoDotNet.Windows.Exceptions;
 using AlastairLundy.OsInfoDotNet.Windows.Helpers;
@@ -158,20 +158,14 @@ public class WindowsSystemInfoProvider : IWindowsSystemInfoProvider
         List<string> ipAddresses = new List<string>();
         
         NetworkCardModel? lastNetworkCard = null;
+        
+        CmdProcessConfiguration cmdProcessConfiguration = new CmdProcessConfiguration("/c systeminfo",
+            false, true, true);
+        
+        BufferedProcessResult result = await _processInvoker.ExecuteBufferedAsync(cmdProcessConfiguration,
+            ProcessExitConfiguration.Default, true, CancellationToken.None);
 
-        ProcessStartInfo startInfo = new ProcessStartInfo
-        {
-            FileName = "cmd.exe",
-            Arguments = "/c systeminfo",
-            UseShellExecute = false,
-            RedirectStandardOutput = true,
-            RedirectStandardError = true,
-            CreateNoWindow = true
-        };
-        
-        BufferedProcessResult processResult = await _processInvoker.ExecuteBufferedAsync(startInfo);
-        
-        string desc = processResult.StandardOutput;
+        string desc = result.StandardOutput;
 
         string[] array = desc.Split(Environment.NewLine);
 

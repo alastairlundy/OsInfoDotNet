@@ -4,11 +4,11 @@
 using System.Runtime.Versioning;
 
 using System;
-using System.Diagnostics;
-using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
+
 using AlastairLundy.CliInvoke.Core;
-using AlastairLundy.CliInvoke.Core.Primitives;
+using AlastairLundy.CliInvoke.Specializations.Configurations;
 using AlastairLundy.OsInfoDotNet.Windows.Abstractions;
 
 namespace AlastairLundy.OsInfoDotNet.Windows;
@@ -35,18 +35,14 @@ public class WinRegistrySearcher : IWinRegistrySearcher
     [SupportedOSPlatform("windows")]
 #endif
     public async Task<string> GetValueAsync(string query){
-        if (!OperatingSystem.IsWindows()) throw new PlatformNotSupportedException();
+        if (!OperatingSystem.IsWindows()) 
+            throw new PlatformNotSupportedException();
+
+        CmdProcessConfiguration cmdProcessConfiguration = new CmdProcessConfiguration($"REG QUERY {query}",
+            false, true, true);
         
-        ProcessStartInfo startInfo = new ProcessStartInfo
-        {
-            Arguments = $"REG QUERY {query}",
-            FileName = Environment.SystemDirectory + Path.DirectorySeparatorChar + "cmd.exe",
-            UseShellExecute = false,
-            RedirectStandardOutput = true,
-            CreateNoWindow = true,
-        };
-        
-        BufferedProcessResult result = await _processInvoker.ExecuteBufferedAsync(startInfo);
+        BufferedProcessResult result = await _processInvoker.ExecuteBufferedAsync(cmdProcessConfiguration,
+            ProcessExitConfiguration.Default, true, CancellationToken.None);
           
         if(string.IsNullOrEmpty(result.StandardOutput))
             throw new ArgumentException();
@@ -65,19 +61,15 @@ public class WinRegistrySearcher : IWinRegistrySearcher
     [SupportedOSPlatform("windows")]
 #endif
     public async Task<string> GetValueAsync(string query, string value){
-        if (!OperatingSystem.IsWindows()) throw new PlatformNotSupportedException();
+        if (!OperatingSystem.IsWindows()) 
+            throw new PlatformNotSupportedException();
         
-        ProcessStartInfo startInfo = new ProcessStartInfo
-        {
-            Arguments = $"REG QUERY {query} /v {value}",
-            FileName = Environment.SystemDirectory + Path.DirectorySeparatorChar + "cmd.exe",
-            UseShellExecute = false,
-            RedirectStandardOutput = true,
-            CreateNoWindow = true,
-        };
+        CmdProcessConfiguration cmdProcessConfiguration = new CmdProcessConfiguration($"REG QUERY {query} /v {value}",
+            false, true, true);
         
-        BufferedProcessResult result = await _processInvoker.ExecuteBufferedAsync(startInfo);
-          
+        BufferedProcessResult result = await _processInvoker.ExecuteBufferedAsync(cmdProcessConfiguration,
+            ProcessExitConfiguration.Default, true, CancellationToken.None);
+
         if(string.IsNullOrEmpty(result.StandardOutput))
             throw new ArgumentException();
         

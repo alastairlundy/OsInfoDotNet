@@ -1,13 +1,11 @@
 using System.Runtime.Versioning;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using AlastairLundy.CliInvoke.Core;
-using AlastairLundy.CliInvoke.Core.Primitives;
+using AlastairLundy.CliInvoke.Specializations.Configurations;
 using AlastairLundy.OsInfoDotNet.Windows.Abstractions;
-using AlastairLundy.OsInfoDotNet.Windows.Helpers;
 
 namespace AlastairLundy.OsInfoDotNet.Windows
 {
@@ -40,17 +38,14 @@ namespace AlastairLundy.OsInfoDotNet.Windows
 
             if (!OperatingSystem.IsWindows()) throw new PlatformNotSupportedException();
 
-            ProcessStartInfo startInfo = new ProcessStartInfo
-            {
-                Arguments = $"Get-WmiObject -Class {wmiClass} | Select-Object *",
-                FileName = $"{WinPowershellInfo.Location}{Path.DirectorySeparatorChar}powershell.exe",
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                CreateNoWindow = true,
-            };
-
-            BufferedProcessResult result = await _processInvoker.ExecuteBufferedAsync(startInfo);
-
+            ClassicPowershellProcessConfiguration classicPowershellConfiguration = new(
+                $"Get-WmiObject -Class {wmiClass} | Select-Object *",
+                false, true, true);
+            
+            BufferedProcessResult result = await _processInvoker.ExecuteBufferedAsync(classicPowershellConfiguration, 
+                ProcessExitConfiguration.Default,
+                true, CancellationToken.None);
+            
             string output = result.StandardOutput.Replace(wmiClass, string.Empty);
 
             if (output == null)

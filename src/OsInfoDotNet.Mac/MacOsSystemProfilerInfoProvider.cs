@@ -1,11 +1,16 @@
 using System;
 using System.Diagnostics;
 using System.Runtime.Versioning;
+using System.Threading;
 using System.Threading.Tasks;
 
 using AlastairLundy.CliInvoke.Core;
+using AlastairLundy.CliInvoke.Core.Builders;
+using AlastairLundy.CliInvoke.Core.Factories;
 using AlastairLundy.OsInfoDotNet.Mac.Abstractions;
 using AlastairLundy.OsInfoDotNet.Mac.Internals.Localizations;
+
+// ReSharper disable ConvertToLocalFunction
 
 namespace AlastairLundy.OsInfoDotNet.Mac;
 
@@ -14,15 +19,18 @@ namespace AlastairLundy.OsInfoDotNet.Mac;
 /// </summary>
 public class MacOsSystemProfilerInfoProvider : IMacOsSystemProfilerInfoProvider
 {
-    private readonly IProcessConfigurationInvoker _processInvoker;
+    private readonly IProcessInvoker _processInvoker;
+    private readonly IProcessConfigurationFactory _processConfigurationFactory;
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="processInvoker"></param>
-    public MacOsSystemProfilerInfoProvider(IProcessConfigurationInvoker processInvoker)
+    /// <param name="processConfigurationFactory"></param>
+    public MacOsSystemProfilerInfoProvider(IProcessInvoker processInvoker, IProcessConfigurationFactory processConfigurationFactory)
     {
         _processInvoker = processInvoker;
+        _processConfigurationFactory = processConfigurationFactory;
     }
     
     /// <summary>
@@ -43,17 +51,21 @@ public class MacOsSystemProfilerInfoProvider : IMacOsSystemProfilerInfoProvider
         {
             macSystemProfilerDataType = "SP" + macSystemProfilerDataType;
         }
-        
-        ProcessStartInfo startInfo = new ProcessStartInfo
+
+        Action<IProcessConfigurationBuilder> action = (builder =>
         {
-            FileName = "/usr/bin/system_profiler",
-            Arguments = macSystemProfilerDataType,
-            UseShellExecute = false,
-            RedirectStandardOutput = true,
-            CreateNoWindow = true
-        };
+            builder.ConfigureShellExecution(false)
+                .ConfigureWindowCreation(false)
+                .RedirectStandardInput(false)
+                .RedirectStandardOutput(true)
+                .RedirectStandardInput(true);
+        });
+        
+       ProcessConfiguration configuration = _processConfigurationFactory.Create("/usr/bin/system_profiler",
+           macSystemProfilerDataType, action);
             
-        BufferedProcessResult result = await _processInvoker.ExecuteBufferedAsync(startInfo);
+        BufferedProcessResult result = await _processInvoker.ExecuteBufferedAsync(configuration, ProcessExitConfiguration.Default,
+            true, CancellationToken.None);
         
         string[] array = result.StandardOutput.Split(Environment.NewLine);
 

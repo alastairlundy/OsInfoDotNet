@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
@@ -31,7 +32,7 @@ public class MacOperatingSystemInfoProvider : IOperatingSystemInfoProvider
 
     private string GetOsName()
     {
-        
+        return RuntimeInformation.OSDescription.Split(' ').First();
     }
     
     /// <summary>

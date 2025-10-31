@@ -12,10 +12,10 @@
         <RepositoryUrl>https://github.com/alastairlundy/OsInfoDotNet</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
     </PropertyGroup>
-
+    
     <ItemGroup>
-      <PackageReference Include="AlastairLundy.CliInvoke.Core" Version="2.0.0-beta.6" />
         <PackageReference Include="Polyfill" Condition="'$(TargetFramework)' == 'netstandard2.0'" Version="9.0.0-beta.22"/>
+      <PackageReference Include="AlastairLundy.CliInvoke.Core" Version="2.0.0" />
     </ItemGroup>
 
     <ItemGroup>

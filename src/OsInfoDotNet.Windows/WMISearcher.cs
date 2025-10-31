@@ -3,14 +3,14 @@
 using System.Runtime.Versioning;
 
 using System;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+
 using AlastairLundy.CliInvoke.Core;
-using AlastairLundy.CliInvoke.Core.Primitives;
+using AlastairLundy.CliInvoke.Specializations.Configurations;
+
 using AlastairLundy.OsInfoDotNet.Windows.Abstractions;
-using AlastairLundy.OsInfoDotNet.Windows.Helpers;
 
 namespace AlastairLundy.OsInfoDotNet.Windows;
 
@@ -41,16 +41,12 @@ public class WMISearcher : IWMISearcher
     {
         if (!OperatingSystem.IsWindows()) throw new PlatformNotSupportedException();
         
-        ProcessStartInfo startInfo = new ProcessStartInfo
-        {
-            Arguments = $"Get-WmiObject -Class {wmiClass} | Select-Object *",
-            FileName = $"{WinPowershellInfo.Location}{Path.DirectorySeparatorChar}powershell.exe",
-            UseShellExecute = false,
-            RedirectStandardOutput = true,
-            CreateNoWindow = true,
-        };
+        ClassicPowershellProcessConfiguration classicPowershellConfig = new(
+            $"Get-WmiObject -Class {wmiClass} | Select-Object *",
+            false, true, true);
   
-        BufferedProcessResult result = await _processInvoker.ExecuteBufferedAsync(startInfo);
+        BufferedProcessResult result = await _processInvoker.ExecuteBufferedAsync(classicPowershellConfig, 
+            ProcessExitConfiguration.DefaultNoException, true, CancellationToken.None);
         
         return result.StandardOutput;
     }
@@ -70,17 +66,13 @@ public class WMISearcher : IWMISearcher
     public async Task<string> GetWMIValue(string property, string wmiClass)
     {
         if (!OperatingSystem.IsWindows()) throw new PlatformNotSupportedException();
-        
-        ProcessStartInfo startInfo = new ProcessStartInfo
-        {
-            Arguments = $"Get-WmiObject -Class {wmiClass} -Property {property}",
-            FileName = $"{WinPowershellInfo.Location}{Path.DirectorySeparatorChar}powershell.exe",
-            UseShellExecute = false,
-            RedirectStandardOutput = true,
-            CreateNoWindow = true,
-        };
+
+        ClassicPowershellProcessConfiguration classicPowershellConfig = new(
+            $"Get-WmiObject -Class {wmiClass} -Property {property}",
+            false, true, true);
   
-        BufferedProcessResult result = await _processInvoker.ExecuteBufferedAsync(startInfo);
+        BufferedProcessResult result = await _processInvoker.ExecuteBufferedAsync(classicPowershellConfig, 
+            ProcessExitConfiguration.DefaultNoException, true, CancellationToken.None);
         
         string[] arr = result.StandardOutput.Split(Convert.ToChar(Environment.NewLine));
 
