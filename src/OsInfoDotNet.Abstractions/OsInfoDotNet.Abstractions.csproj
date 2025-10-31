@@ -1,9 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+        <TargetFrameworks>net8.0;net9.0;net10.0;netstandard2.0</TargetFrameworks>
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <LangVersion>13</LangVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageId>AlastairLundy.OsInfoDotNet.Abstractions</PackageId>
         <Title>OsInfoDotNet.Abstractions</Title>
@@ -11,6 +12,12 @@
         <Copyright>Copyright (c) Alastair Lundy 2025</Copyright>
         <RepositoryType>git</RepositoryType>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     </PropertyGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Bcl.HashCode" Version="6.0.0" 
+                          Condition="'$(TargetFramework)' == 'netstandard2.0'"/>
+    </ItemGroup>
 
 </Project>

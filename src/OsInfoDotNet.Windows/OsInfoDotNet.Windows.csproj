@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net8.0;net9.0;</TargetFrameworks>
+        <TargetFrameworks>netstandard2.0;net8.0;net9.0;net10.0;</TargetFrameworks>
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <LangVersion>13</LangVersion>
+        <LangVersion>14</LangVersion>
         <AssemblyName>AlastairLundy.OsInfoDotNet.Windows</AssemblyName>
         <RootNamespace>AlastairLundy.OsInfoDotNet.Windows</RootNamespace>
         <PackageId>AlastairLundy.OsInfoDotNet.Windows</PackageId>
@@ -16,6 +16,7 @@
 
     <ItemGroup>
       <PackageReference Include="AlastairLundy.CliInvoke.Core" Version="2.0.0-alpha.7" />
+        <PackageReference Include="Polyfill" Condition="'$(TargetFramework)' == 'netstandard2.0'" Version="9.0.0-beta.22"/>
     </ItemGroup>
 
 </Project>
