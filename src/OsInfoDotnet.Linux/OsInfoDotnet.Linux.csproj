@@ -10,7 +10,7 @@
 
     <ItemGroup>
       <PackageReference Include="AlastairLundy.CliInvoke.Core" Version="2.0.0" />
-      <PackageReference Include="AlastairLundy.OsReleaseNet" Version="2.1.0" />
+      <PackageReference Include="AlastairLundy.OsReleaseNet" Version="2.2.0" />
     </ItemGroup>
 
     <ItemGroup>
