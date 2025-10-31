@@ -5,11 +5,11 @@
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>14</LangVersion>
-        <AssemblyName>AlastairLundy.OsInfoDotNet.Windows</AssemblyName>
-        <RootNamespace>AlastairLundy.OsInfoDotNet.Windows</RootNamespace>
-        <PackageId>AlastairLundy.OsInfoDotNet.Windows</PackageId>
+        <AssemblyName>OsInfoDotNet.Windows</AssemblyName>
+        <RootNamespace>OsInfoDotNet.Windows</RootNamespace>
+        <PackageId>OsInfoDotNet.Windows</PackageId>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Title>AlastairLundy.OsInfoDotNet.Windows</Title>
+        <Title>OsInfoDotNet.Windows</Title>
         <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <Authors />

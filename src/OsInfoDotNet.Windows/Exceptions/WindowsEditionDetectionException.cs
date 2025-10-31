@@ -25,7 +25,7 @@
 
 using System;
 
-namespace AlastairLundy.OsInfoDotNet.Windows.Exceptions;
+namespace OsInfoDotNet.Windows.Exceptions;
 
 public class WindowsEditionDetectionException : Exception
 {

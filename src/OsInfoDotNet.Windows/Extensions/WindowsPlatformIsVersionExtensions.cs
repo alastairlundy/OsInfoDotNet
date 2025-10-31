@@ -1,8 +1,7 @@
 ﻿using System;
-
 using OsInfoDotNet.Abstractions;
 
-namespace AlastairLundy.OsInfoDotNet.Windows.Extensions;
+namespace OsInfoDotNet.Windows.Extensions;
 
 public static class WindowsPlatformIsVersionExtensions
 {

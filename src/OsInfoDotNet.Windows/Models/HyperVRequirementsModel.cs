@@ -22,8 +22,7 @@
        SOFTWARE.
    */
 
-// ReSharper disable once CheckNamespace
-namespace AlastairLundy.OsInfoDotNet.Windows;
+namespace OsInfoDotNet.Windows;
 
 public class HyperVRequirementsModel
 {

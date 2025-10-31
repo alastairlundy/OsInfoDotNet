@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Text;
 
-// ReSharper disable once CheckNamespace
-namespace AlastairLundy.OsInfoDotNet.Windows;
+namespace OsInfoDotNet.Windows;
 
 public class WindowsSystemInfo
 {

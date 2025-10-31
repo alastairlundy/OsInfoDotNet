@@ -1,5 +1,5 @@
 ﻿
-namespace AlastairLundy.OsInfoDotNet.Windows;
+namespace OsInfoDotNet.Windows;
 
 /// <summary>
 /// 

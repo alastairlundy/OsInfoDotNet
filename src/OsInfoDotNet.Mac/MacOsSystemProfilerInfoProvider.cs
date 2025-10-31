@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using System.Runtime.Versioning;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,12 +6,13 @@ using System.Threading.Tasks;
 using AlastairLundy.CliInvoke.Core;
 using AlastairLundy.CliInvoke.Core.Builders;
 using AlastairLundy.CliInvoke.Core.Factories;
-using AlastairLundy.OsInfoDotNet.Mac.Abstractions;
-using AlastairLundy.OsInfoDotNet.Mac.Internals.Localizations;
+
+using OsInfoDotNet.Mac.Abstractions;
+using OsInfoDotNet.Mac.Internals.Localizations;
 
 // ReSharper disable ConvertToLocalFunction
 
-namespace AlastairLundy.OsInfoDotNet.Mac;
+namespace OsInfoDotNet.Mac;
 
 /// <summary>
 /// 
@@ -27,7 +27,8 @@ public class MacOsSystemProfilerInfoProvider : IMacOsSystemProfilerInfoProvider
     /// </summary>
     /// <param name="processInvoker"></param>
     /// <param name="processConfigurationFactory"></param>
-    public MacOsSystemProfilerInfoProvider(IProcessInvoker processInvoker, IProcessConfigurationFactory processConfigurationFactory)
+    public MacOsSystemProfilerInfoProvider(IProcessInvoker processInvoker, 
+        IProcessConfigurationFactory processConfigurationFactory)
     {
         _processInvoker = processInvoker;
         _processConfigurationFactory = processConfigurationFactory;

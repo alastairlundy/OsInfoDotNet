@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 // ReSharper disable InconsistentNaming
 
-namespace AlastairLundy.OsInfoDotNet.Windows.Abstractions;
+namespace OsInfoDotNet.Windows.Abstractions;
 
 public interface IWMISearcher
 {

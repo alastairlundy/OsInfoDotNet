@@ -1,17 +1,12 @@
-﻿
-
-
+﻿using System;
 using System.Runtime.Versioning;
-
-using System;
 using System.Threading;
 using System.Threading.Tasks;
-
 using AlastairLundy.CliInvoke.Core;
 using AlastairLundy.CliInvoke.Specializations.Configurations;
-using AlastairLundy.OsInfoDotNet.Windows.Abstractions;
+using OsInfoDotNet.Windows.Abstractions;
 
-namespace AlastairLundy.OsInfoDotNet.Windows;
+namespace OsInfoDotNet.Windows;
 
 /// <summary>
 /// A class to make searching the Windows Registry easier.

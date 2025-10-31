@@ -1,6 +1,6 @@
 using System;
 
-namespace AlastairLundy.OsInfoDotNet.Windows.Helpers;
+namespace OsInfoDotNet.Windows.Helpers;
 
 internal class DateParser
 {

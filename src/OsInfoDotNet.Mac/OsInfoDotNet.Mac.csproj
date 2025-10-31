@@ -1,20 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net10.0;net8.0;net9.0;netstandard2.0</TargetFrameworks>
+        <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <LangVersion>14</LangVersion>
-        <AssemblyName>AlastairLundy.OsInfoDotNet.Mac</AssemblyName>
-        <RootNamespace>AlastairLundy.OsInfoDotNet.Mac</RootNamespace>
+        <AssemblyName>OsInfoDotNet.Mac</AssemblyName>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageId>AlastairLundy.OsInfoDotNet.Mac</PackageId>
+        <PackageId>OsInfoDotNet.Mac</PackageId>
         <RepositoryUrl>https://github.com/alastairlundy/OsInfoDotNet</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
     </PropertyGroup>
-    
+
     <ItemGroup>
-        <PackageReference Include="Polyfill" Condition="'$(TargetFramework)' == 'netstandard2.0'" Version="9.0.0-beta.22"/>
       <PackageReference Include="AlastairLundy.CliInvoke.Core" Version="2.0.0" />
     </ItemGroup>
 

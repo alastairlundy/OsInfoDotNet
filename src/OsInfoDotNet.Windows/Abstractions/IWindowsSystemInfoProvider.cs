@@ -1,10 +1,9 @@
 using System;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
+using OsInfoDotNet.Windows.Exceptions;
 
-using AlastairLundy.OsInfoDotNet.Windows.Exceptions;
-
-namespace AlastairLundy.OsInfoDotNet.Windows.Abstractions;
+namespace OsInfoDotNet.Windows.Abstractions;
 
 public interface IWindowsSystemInfoProvider
 {

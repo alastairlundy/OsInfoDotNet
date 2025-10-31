@@ -1,18 +1,13 @@
-﻿
-
-using System.Runtime.Versioning;
-
-using System;
+﻿using System;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Threading;
 using System.Threading.Tasks;
-
 using AlastairLundy.CliInvoke.Core;
 using AlastairLundy.CliInvoke.Specializations.Configurations;
+using OsInfoDotNet.Windows.Abstractions;
 
-using AlastairLundy.OsInfoDotNet.Windows.Abstractions;
-
-namespace AlastairLundy.OsInfoDotNet.Windows;
+namespace OsInfoDotNet.Windows;
 
 /// <summary>
 /// A class to make searching WMI easier.

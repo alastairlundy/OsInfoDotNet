@@ -22,7 +22,7 @@
        SOFTWARE.
    */
 
-namespace AlastairLundy.OsInfoDotNet.Windows;
+namespace OsInfoDotNet.Windows;
 
 /// <summary>
 /// An enum representing different Windows Editions.

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
-namespace AlastairLundy.OsInfoDotNet.Windows.Abstractions;
+namespace OsInfoDotNet.Windows.Abstractions;
 
 public interface IWinManagementObjectSearcher
 {

@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace AlastairLundy.OsInfoDotNet.Mac.Abstractions;
+namespace OsInfoDotNet.Mac.Abstractions;
 
 /// <summary>
 /// 
